@@ -1,6 +1,5 @@
 const argv = require('yargs').argv;
 require('dotenv').config();
-//console.log(process.env);
 
 const DEFAULT_CITY = 'Offenburg'
 
