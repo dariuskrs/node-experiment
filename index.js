@@ -1,17 +1,16 @@
 const request = require('request');
-// import config from './config.js';
 const config = require('./config');
 
-request(config.OPEN_WEATHER_API_ENDPOINT, function (error, response, body) {
+request(config.WEATHER_API_ENDPOINT, function (error, response, body) {
   if (error) {
     console.error('error:', error);
     console.log('statusCode:', response && response.statusCode);
   } else {
-    let weather = JSON.parse(body);
-    if (weather.hasOwnProperty('cod')) {
-      console.log(`Could not fetch the weather; error code: ${weather.cod}`);
+    let weatherData = JSON.parse(body);
+    if (weatherData.hasOwnProperty('success') && weatherData.success === false) {
+      console.log(`Could not fetch the weather; error code: ${weatherData.error.code}`);
     } else {
-      let message = `It's ${weather.main.temp} degrees in ${weather.name}!`;
+      let message = `Place: ${weatherData.location.name}; Conditions: ${weatherData.current.weather_descriptions.join(', ')}; temperature: ${weatherData.current.temperature} C`;
       console.log(message);
     }
   }

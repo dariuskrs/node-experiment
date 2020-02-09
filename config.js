@@ -1,5 +1,12 @@
+const argv = require('yargs').argv;
+require('dotenv').config();
+//console.log(process.env);
+
+const DEFAULT_CITY = 'Offenburg'
+
+let city = argv.c || DEFAULT_CITY;
+
 module.exports = {
-    OPEN_WEATHER_MAP_API_KEY: "TO UPDATE",
-    OPEN_WEATHER_API_ENDPOINT: 'http://api.openweathermap.org/data/2.5/weather?q=${DEFAULT_CITY}&appid=${OPEN_WEATHER_MAP_API_KEY}',
-    DEFAULT_CITY: 'Offenburg'
+    WEATHER_API_ENDPOINT: `http://api.weatherstack.com/current?access_key=${process.env.WEATHER_API_KEY}&query=${city}&units=m`,
+    DEFAULT_CITY
 };
